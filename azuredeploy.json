@@ -55,6 +55,7 @@
       "vNetAddressPrefix": "10.0.1.0/24",
       "vNetSubnetName": "BackendSubnet",
       "vNetSubnetAddressPrefix": "10.0.1.0/24",
+      "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vNetName'), variables('vNetSubnetName'))]",
       "vmSize": "Standard_DS1_v2",
       "vmStorageAccountType": "Premium_LRS"
     },
@@ -76,18 +77,22 @@
             {
               "name": "[variables('lbFrontEndName1')]",
               "properties": {
-                "publicIPAddress": {
-                  "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('lbPublicIpAddressName1'))]"
-                }
+                "subnet": {
+                  "id": "[variables('subnetRef')]"
+                },
+                "privateIPAddress": "10.0.1.6",
+                "privateIPAllocationMethod": "Static"
               }
             },
             {
-                "name": "[variables('lbFrontEndName2')]",
-                "properties": {
-                  "publicIPAddress": {
-                    "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('lbPublicIpAddressName2'))]"
-                  }
-                }
+              "name": "[variables('lbFrontEndName2')]",
+              "properties": {
+                "subnet": {
+                  "id": "[variables('subnetRef')]"
+                },
+                "privateIPAddress": "10.0.1.7",
+                "privateIPAllocationMethod": "Static"
+              }
             }
           ],
           "backendAddressPools": [
