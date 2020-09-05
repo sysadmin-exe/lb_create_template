@@ -1,4 +1,4 @@
-#Template creates Internal load balancer with 2 backend pools that contains 3 VMs each
+##Template creates Internal load balancer with 2 backend pools that contains 3 VMs each
 
 The below PowerShell script will deploy the ARM template
 
